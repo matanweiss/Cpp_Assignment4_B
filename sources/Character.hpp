@@ -4,9 +4,9 @@ using namespace std;
 
 class Character {
   string name;
-  Point location;
   int health;
   bool isNinja;
+  Point location;
 
 public:
   Character(string name,  const Point &location, int health, bool isNinja);

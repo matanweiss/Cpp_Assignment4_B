@@ -31,6 +31,8 @@ void Team::add(Character *member) {
 }
 
 void Team::attack(Team *other) {
+  if (!other->stillAlive())
+    return;
   leader = findAliveMember(this);
   Character *target = findAliveMember(other);
   for (Character *member : members) {
@@ -67,9 +69,6 @@ void Team::print() {
 }
 
 Character *Team::findAliveMember(Team *team) {
-  if (team->leader->isAlive())
-    return team->leader;
-
   double shortest = DBL_MAX;
   Character *result = NULL;
   for (Character *member : team->members)

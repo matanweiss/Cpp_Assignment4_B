@@ -13,8 +13,6 @@ class Point
 
 public:
     Point(double xAxis, double yAxis);
-    double getX() const;
-    double getY() const;
     double distance(const Point& other);
     string print();
     static Point moveTowards(Point src, Point dest, double distance);
