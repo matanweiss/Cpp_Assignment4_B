@@ -13,6 +13,7 @@ Character::Character(string name, const Point &location, int health,
 bool Character::isAlive() { return 0 < health; }
 bool Character::getIsNinja() { return isNinja; }
 bool Character::getIsInTeam() { return isInTeam; }
+void Character::setIsInTeam() { isInTeam = true; }
 double Character::distance(Character *other) {
   return location.distance(other->getLocation());
 }

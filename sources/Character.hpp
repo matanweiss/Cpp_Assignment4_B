@@ -14,6 +14,7 @@ public:
   bool isAlive();
   bool getIsNinja();
   bool getIsInTeam();
+  void setIsInTeam();
   double distance( Character *other);
   void hit(int damage);
   string getName();

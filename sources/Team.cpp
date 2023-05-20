@@ -6,7 +6,12 @@
 
 Team::Team(const Team &other) : leader(other.leader) {}
 
-Team::Team(Character *leader) : leader(leader) { members.push_back(leader); }
+Team::Team(Character *leader) : leader(leader) {
+  if (leader->getIsInTeam())
+    throw runtime_error("Leader is already on a team");
+  members.push_back(leader);
+  leader->setIsInTeam();
+}
 
 Team::Team(Team &&other) noexcept {
   leader = other.leader;
@@ -27,8 +32,10 @@ Team &Team::operator=(Team &&other) noexcept {
 
 void Team::add(Character *member) {
   if (members.size() == 10 || member->getIsInTeam())
-    return;
+    throw runtime_error(
+        "there are maximum 10 members that are not already in other teams");
   members.push_back(member);
+  member->setIsInTeam();
 }
 
 void Team::attack(Team *other) {
