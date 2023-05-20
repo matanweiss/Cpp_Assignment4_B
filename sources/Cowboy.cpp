@@ -9,14 +9,16 @@ void Cowboy::shoot(Character *enemy) {
     throw runtime_error("Cowboy is not alive");
   if (!enemy->isAlive())
     throw runtime_error("Enemy is not alive");
-  enemy->hit(10);
-  ammo -= 1;
+  if (hasboolets()) {
+    enemy->hit(10);
+    ammo -= 1;
+  }
 }
 bool Cowboy::hasboolets() { return 0 < ammo; }
 void Cowboy::reload() {
   if (!isAlive())
     throw runtime_error("Cowboy is not alive");
-  ammo += 6;
+  ammo = 6;
 }
 string Cowboy::print() {
   if (isAlive())
