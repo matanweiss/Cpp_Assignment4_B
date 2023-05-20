@@ -1,4 +1,5 @@
-#pragma once
+#ifndef COWBOY
+#define COWBOY
 #include "Character.hpp"
 
 class Cowboy : public Character {
@@ -12,3 +13,4 @@ public:
   string print() override;
   void attack(Character * enemy) override;
 };
+#endif

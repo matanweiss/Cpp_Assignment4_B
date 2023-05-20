@@ -1,4 +1,5 @@
-#pragma once
+#ifndef TEAM
+#define TEAM
 #include "Character.hpp"
 #include "Cowboy.hpp"
 #include "Ninja.hpp"
@@ -26,7 +27,8 @@ public:
   vector<Character *> *getMembers();
   void setLeader(Character*);
   void setMembers(vector<Character*>*);
-  ~Team();
+  virtual ~Team(){};
 };
 
 namespace ariel {};
+#endif

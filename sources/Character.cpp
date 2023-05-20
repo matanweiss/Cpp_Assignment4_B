@@ -10,6 +10,39 @@ Character::Character(string name, const Point &location, int health,
     : name(name), location(location), health(health), isNinja(isNinja),
       isInTeam(false) {}
 
+Character::Character(const Character &other)
+    : name(other.name), location(other.location), health(other.health),
+      isNinja(other.isNinja), isInTeam(other.isInTeam) {}
+
+Character::Character(Character &&other) noexcept
+    : name(other.name), location(other.location), health(other.health),
+      isInTeam(other.isInTeam), isNinja(other.isNinja) {}
+
+Character &Character::operator=(const Character &other) {
+  if (this == &other)
+    return *this;
+
+  name = other.name;
+  location = other.location;
+  health = other.health;
+  isInTeam = other.isInTeam;
+  isNinja = other.isNinja;
+
+  return *this;
+}
+
+Character &Character::operator=(Character &&other) noexcept {
+  if (this == &other)
+    return *this;
+
+  name = other.name;
+  location = other.location;
+  health = other.health;
+  isInTeam = other.isInTeam;
+  isNinja = other.isNinja;
+
+  return *this;
+}
 bool Character::isAlive() { return 0 < health; }
 bool Character::getIsNinja() { return isNinja; }
 bool Character::getIsInTeam() { return isInTeam; }

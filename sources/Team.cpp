@@ -103,5 +103,3 @@ void Team::setLeader(Character *newLeader) { leader = newLeader; }
 void Team::setMembers(vector<Character *> *newMembers) {
   members = *newMembers;
 }
-
-Team::~Team() {}

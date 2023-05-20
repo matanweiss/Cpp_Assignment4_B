@@ -6,20 +6,6 @@ SmartTeam::SmartTeam(const Team &other) : Team(other) {}
 
 SmartTeam::SmartTeam(Character *leader) : Team(leader) {}
 
-SmartTeam::SmartTeam(Team &&other) noexcept : Team(other) {}
-
-SmartTeam &SmartTeam::operator=(Team &other) {
-  setLeader(other.getLeader());
-  setMembers(other.getMembers());
-  return *this;
-}
-
-SmartTeam &SmartTeam::operator=(Team &&other) noexcept {
-  setLeader(other.getLeader());
-  setMembers(other.getMembers());
-  return *this;
-}
-
 void SmartTeam::attack(Team *other) {
   if (!other)
     throw invalid_argument("Team cannot be null");
@@ -63,5 +49,3 @@ void SmartTeam::print() {
     if (member->isAlive())
       cout << member->print() << endl;
 }
-
-SmartTeam::~SmartTeam() {}

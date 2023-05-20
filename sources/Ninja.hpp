@@ -1,4 +1,5 @@
-#pragma once
+#ifndef NINJA
+#define NINJA
 #include "Character.hpp"
 
 constexpr int YOUNG_NINJA_HP = 100;
@@ -22,4 +23,4 @@ public:
 
 
 
-
+#endif
