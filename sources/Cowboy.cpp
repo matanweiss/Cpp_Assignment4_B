@@ -30,7 +30,7 @@ string Cowboy::print() {
 void Cowboy::attack(Character *enemy) {
   if (!isAlive() || !enemy->isAlive())
     return;
-  if (this == enemy)
+  if (this == enemy) // NOT WORKING
     throw runtime_error("Cannot attack itself");
   if (hasboolets())
     shoot(enemy);

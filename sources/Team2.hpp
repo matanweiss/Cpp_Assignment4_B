@@ -1,22 +1,17 @@
 #pragma once
 #include "Team.hpp"
-#include <vector>
 
-class Team2:public Team {
+class Team2 : public Team {
   Character *leader;
-  vector<Character *> team;
+  vector<Character *> members;
 
 public:
-  Team2(const Team2& other);
+  Team2(const Team &other);
   Team2(Character *leader);
-  Team2(Team2&& other)noexcept;
-  Team2& operator=(const Team2& other);
-  Team2& operator=( Team2&& other)noexcept;
-  void add(Character *member);
+  Team2(Team &&other) noexcept;
+  Team2 &operator=( Team &other);
+  Team2 &operator=(Team &&other) noexcept;
   void attack(Team *other);
-  int stillAlive();
   void print();
   ~Team2();
 };
-
-namespace ariel {};

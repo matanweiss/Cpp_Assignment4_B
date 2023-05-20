@@ -82,4 +82,8 @@ Character *Team::findAliveMember(Team *team) {
   return result;
 }
 
+Character *Team::getLeader() const { return leader; }
+
+vector<Character *> *Team::getMembers() { return &members; }
+
 Team::~Team() {}

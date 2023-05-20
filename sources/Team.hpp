@@ -22,6 +22,8 @@ public:
   int stillAlive();
   void print();
   Character* findAliveMember(Team* team);
+  Character *getLeader() const;
+  vector<Character *> *getMembers();
   ~Team();
 };
 
