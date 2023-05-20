@@ -1,6 +1,7 @@
 #include "Team.hpp"
 #include "Character.hpp"
 #include <cfloat>
+#include <stdexcept>
 #include <vector>
 
 Team::Team(const Team &other) : leader(other.leader) {}
@@ -25,12 +26,14 @@ Team &Team::operator=(Team &&other) noexcept {
 }
 
 void Team::add(Character *member) {
-  if (members.size() == 10)
+  if (members.size() == 10 || member->getIsInTeam())
     return;
   members.push_back(member);
 }
 
 void Team::attack(Team *other) {
+  if (!other)
+    throw invalid_argument("Team cannot be null");
   if (!other->stillAlive())
     return;
   leader = findAliveMember(this);

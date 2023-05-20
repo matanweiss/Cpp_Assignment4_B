@@ -1,5 +1,6 @@
 #include "Cowboy.hpp"
 #include "Character.hpp"
+#include <stdexcept>
 
 Cowboy::Cowboy(string name, const Point &location)
     : Character(name, location, 110, 0), ammo(6) {}
@@ -14,7 +15,7 @@ void Cowboy::shoot(Character *enemy) {
 bool Cowboy::hasboolets() { return 0 < ammo; }
 void Cowboy::reload() {
   if (!isAlive())
-    return;
+    throw runtime_error("Cowboy is not alive");
   ammo += 6;
 }
 string Cowboy::print() {
@@ -27,6 +28,8 @@ string Cowboy::print() {
 void Cowboy::attack(Character *enemy) {
   if (!isAlive() || !enemy->isAlive())
     return;
+  if (this == enemy)
+    throw runtime_error("Cannot attack itself");
   if (hasboolets())
     shoot(enemy);
   else
