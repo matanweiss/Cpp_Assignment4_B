@@ -42,21 +42,27 @@ void Team::attack(Team *other) {
   if (!other)
     throw invalid_argument("Team cannot be null");
   if (!other->stillAlive())
-    return;
+    throw runtime_error("The other team has no alive members");
   leader = findAliveMember(this);
   Character *target = findAliveMember(other);
   for (Character *member : members) {
     if (member->getIsNinja())
       continue;
-    if (!target->isAlive())
+    if (!target->isAlive()) {
       target = findAliveMember(other);
+      if (!target)
+        return;
+    }
     member->attack(target);
   }
   for (Character *member : members) {
     if (!member->getIsNinja())
       continue;
-    if (!target->isAlive())
+    if (!target->isAlive()) {
       target = findAliveMember(other);
+      if (!target)
+        return;
+    }
     member->attack(target);
   }
 }

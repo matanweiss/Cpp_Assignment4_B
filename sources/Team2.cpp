@@ -32,8 +32,11 @@ void Team2::attack(Team *other) {
   leader = findAliveMember(this);
   Character *target = findAliveMember(other);
   for (Character *member : members) {
-    if (!target->isAlive())
+    if (!target->isAlive()) {
       target = findAliveMember(other);
+      if (!target)
+        return;
+    }
     member->attack(target);
   }
 }
