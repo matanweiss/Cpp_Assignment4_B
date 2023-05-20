@@ -24,6 +24,8 @@ public:
   Character* findAliveMember(Team* team);
   Character *getLeader() const;
   vector<Character *> *getMembers();
+  void setLeader(Character*);
+  void setMembers(vector<Character*>*);
   ~Team();
 };
 

@@ -2,8 +2,6 @@
 #include "Team.hpp"
 
 class Team2 : public Team {
-  Character *leader;
-  vector<Character *> members;
 
 public:
   Team2(const Team &other);

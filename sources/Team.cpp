@@ -99,4 +99,9 @@ Character *Team::getLeader() const { return leader; }
 
 vector<Character *> *Team::getMembers() { return &members; }
 
+void Team::setLeader(Character *newLeader) { leader = newLeader; }
+void Team::setMembers(vector<Character *> *newMembers) {
+  members = *newMembers;
+}
+
 Team::~Team() {}
