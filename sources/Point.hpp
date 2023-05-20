@@ -3,6 +3,7 @@
 #include <string>
 #include <cmath>
 #include <float.h>
+#include <stdexcept>
 
 using namespace std;
 

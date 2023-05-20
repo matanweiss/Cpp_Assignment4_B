@@ -11,8 +11,8 @@ Character::Character(string name, const Point &location, int health,
 
 bool Character::isAlive() { return 0 < health; }
 bool Character::getIsNinja() { return isNinja; }
-double Character::distance(const Character &other) {
-  return location.distance(other.getLocation());
+double Character::distance(Character *other) {
+  return location.distance(other->getLocation());
 }
 void Character::hit(int damage) { health = max(0, health - damage); }
 string Character::getName() { return name; }

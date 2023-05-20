@@ -12,7 +12,7 @@ public:
   Character(string name,  const Point &location, int health, bool isNinja);
   bool isAlive();
   bool getIsNinja();
-  double distance(const Character &other);
+  double distance( Character *other);
   void hit(int damage);
   string getName();
   virtual string print() = 0;

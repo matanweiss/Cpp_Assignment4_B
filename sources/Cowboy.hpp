@@ -7,7 +7,7 @@ class Cowboy : public Character {
 public:
   Cowboy(string name,const Point &location);
   void shoot(Character* enemy);
-  bool hasBullets();
+  bool hasboolets();
   void reload();
   string print() override;
   void attack(Character * enemy) override;

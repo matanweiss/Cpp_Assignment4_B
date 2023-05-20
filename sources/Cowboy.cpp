@@ -4,12 +4,14 @@
 Cowboy::Cowboy(string name, const Point &location)
     : Character(name, location, 110, 0), ammo(6) {}
 void Cowboy::shoot(Character *enemy) {
-  if (isAlive() && hasBullets()) {
-    enemy->hit(10);
-    ammo -= 1;
-  }
+  if (!isAlive())
+    throw runtime_error("Cowboy is not alive");
+  if (!enemy->isAlive())
+    throw runtime_error("Enemy is not alive");
+  enemy->hit(10);
+  ammo -= 1;
 }
-bool Cowboy::hasBullets() { return 0 < ammo; }
+bool Cowboy::hasboolets() { return 0 < ammo; }
 void Cowboy::reload() {
   if (!isAlive())
     return;
@@ -23,7 +25,9 @@ string Cowboy::print() {
 }
 
 void Cowboy::attack(Character *enemy) {
-  if (hasBullets())
+  if (!isAlive() || !enemy->isAlive())
+    return;
+  if (hasboolets())
     shoot(enemy);
   else
     reload();

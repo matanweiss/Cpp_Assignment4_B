@@ -9,6 +9,10 @@ void Ninja::move(const Character *enemy) {
   setLocation(Point::moveTowards(getLocation(), enemy->getLocation(), speed));
 }
 void Ninja::slash(Character *enemy) {
+  if (!isAlive())
+    throw runtime_error("Ninja is not alive");
+  if (!enemy->isAlive())
+    throw runtime_error("Enemy is not alive");
   if (isAlive() && getLocation().distance(enemy->getLocation()) < 1)
     enemy->hit(40);
 }
@@ -20,7 +24,9 @@ string Ninja::print() {
 }
 
 void Ninja::attack(Character *enemy) {
-  if (distance(*enemy) < 1)
+  if (!isAlive() || !enemy->isAlive())
+    return;
+  if (distance(enemy) < 1)
     slash(enemy);
   else
     move(enemy);

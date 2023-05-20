@@ -72,8 +72,8 @@ Character *Team::findAliveMember(Team *team) {
   double shortest = DBL_MAX;
   Character *result = NULL;
   for (Character *member : team->members)
-    if (member->isAlive() && team->leader->distance(*member) < shortest) {
-      shortest = team->leader->distance(*member);
+    if (member->isAlive() && team->leader->distance(member) < shortest) {
+      shortest = team->leader->distance(member);
       result = member;
     }
   return result;
