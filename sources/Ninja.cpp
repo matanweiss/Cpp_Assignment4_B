@@ -13,6 +13,8 @@ void Ninja::slash(Character *enemy) {
     throw runtime_error("Ninja is not alive");
   if (!enemy->isAlive())
     throw runtime_error("Enemy is not alive");
+  if (this == enemy)
+    throw runtime_error("Cannot attack itself");
   if (isAlive() && getLocation().distance(enemy->getLocation()) < 1)
     enemy->hit(40);
 }
@@ -26,8 +28,6 @@ string Ninja::print() {
 void Ninja::attack(Character *enemy) {
   if (!isAlive() || !enemy->isAlive())
     return;
-  if (this == enemy) // NOT WORKING
-    throw runtime_error("Cannot attack itself");
   if (distance(enemy) < 1)
     slash(enemy);
   else

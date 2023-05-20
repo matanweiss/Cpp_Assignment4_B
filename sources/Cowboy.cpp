@@ -9,6 +9,8 @@ void Cowboy::shoot(Character *enemy) {
     throw runtime_error("Cowboy is not alive");
   if (!enemy->isAlive())
     throw runtime_error("Enemy is not alive");
+  if (this == enemy)
+    throw runtime_error("Cannot attack itself");
   if (hasboolets()) {
     enemy->hit(10);
     ammo -= 1;
@@ -30,8 +32,6 @@ string Cowboy::print() {
 void Cowboy::attack(Character *enemy) {
   if (!isAlive() || !enemy->isAlive())
     return;
-  if (this == enemy) // NOT WORKING
-    throw runtime_error("Cannot attack itself");
   if (hasboolets())
     shoot(enemy);
   else
