@@ -38,8 +38,7 @@ void Team2::attack(Team *other) {
 
 void Team2::print() {
   for (Character *member : *getMembers())
-    if (member->isAlive())
-      cout << member->print() << endl;
+    cout << member->print() << endl;
 }
 
 Team2::~Team2() {}

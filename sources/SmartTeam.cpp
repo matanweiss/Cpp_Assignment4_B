@@ -2,40 +2,66 @@
 #include "Character.hpp"
 #include <vector>
 
-SmartTeam::SmartTeam(const SmartTeam &other)
-    : Team(other), leader(other.leader) {}
+SmartTeam::SmartTeam(const Team &other) : Team(other) {}
 
-SmartTeam::SmartTeam(Character *leader) : Team(leader), leader(leader) {
-  team.push_back(leader);
-}
+SmartTeam::SmartTeam(Character *leader) : Team(leader) {}
 
-SmartTeam::SmartTeam(SmartTeam &&other) noexcept : Team(other) {
-  leader = other.leader;
-  team = other.team;
-}
+SmartTeam::SmartTeam(Team &&other) noexcept : Team(other) {}
 
-SmartTeam &SmartTeam::operator=(const SmartTeam &other) {
-  leader = other.leader;
-  team = other.team;
+SmartTeam &SmartTeam::operator=(Team &other) {
+  setLeader(other.getLeader());
+  setMembers(other.getMembers());
   return *this;
 }
 
-SmartTeam &SmartTeam::operator=(SmartTeam &&other) noexcept {
-  leader = other.leader;
-  team = other.team;
+SmartTeam &SmartTeam::operator=(Team &&other) noexcept {
+  setLeader(other.getLeader());
+  setMembers(other.getMembers());
   return *this;
 }
 
-void SmartTeam::add(Character *member) {
-  if (team.size() == 10)
+void SmartTeam::attack(Team *other) {
+  if (!other)
+    throw invalid_argument("Team cannot be null");
+  if (!other->stillAlive())
     return;
-  team.push_back(member);
+  setLeader(findAliveMember(this));
+  for (Character *member : *getMembers()) {
+    Character *target = NULL;
+
+    // member is ninja, do the most damage within 1 meters
+    if (member->getIsNinja()) {
+      int damage = 0;
+      for (Character *enemy : *other->getMembers()) {
+        if (enemy->isAlive()) {
+          if (member->distance(enemy) < 1 && damage < enemy->getHealth()) {
+            damage = enemy->getHealth();
+            target = enemy;
+          }
+        }
+      }
+
+      // if there are no close enemies, find enemy to move closer to
+      if (target == NULL)
+        target = findAliveMember(other);
+    }
+
+    // member is cowboy, if the enemy has 10 or less hp then attack it
+    else {
+      for (Character *enemy : *other->getMembers()) {
+        if (enemy->isAlive() && enemy->getHealth() <= 10) {
+          target = enemy;
+        }
+      }
+    }
+    member->attack(target);
+  }
 }
 
-void SmartTeam::attack(Team *other) {}
-
-int SmartTeam::stillAlive() { return 0; }
-
-void SmartTeam::print() {}
+void SmartTeam::print() {
+  for (Character *member : *getMembers())
+    if (member->isAlive())
+      cout << member->print() << endl;
+}
 
 SmartTeam::~SmartTeam() {}

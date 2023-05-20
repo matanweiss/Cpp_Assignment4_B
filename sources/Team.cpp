@@ -77,10 +77,10 @@ int Team::stillAlive() {
 
 void Team::print() {
   for (Character *member : members)
-    if (!member->getIsNinja() && member->isAlive())
+    if (!member->getIsNinja())
       cout << member->print() << endl;
   for (Character *member : members)
-    if (member->getIsNinja() && member->isAlive())
+    if (member->getIsNinja())
       cout << member->print() << endl;
 }
 
