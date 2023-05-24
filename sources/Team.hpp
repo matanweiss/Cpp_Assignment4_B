@@ -27,7 +27,7 @@ public:
   vector<Character *> *getMembers();
   void setLeader(Character*);
   void setMembers(vector<Character*>*);
-  virtual ~Team(){};
+  virtual ~Team();
 };
 
 namespace ariel {};

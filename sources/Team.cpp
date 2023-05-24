@@ -19,9 +19,7 @@ Team::Team(Team &&other) noexcept {
 }
 
 Team &Team::operator=(const Team &other) {
-  leader = other.leader;
-  members = other.members;
-  return *this;
+  throw runtime_error("cannot create team from another team");
 }
 
 Team &Team::operator=(Team &&other) noexcept {
@@ -102,4 +100,10 @@ vector<Character *> *Team::getMembers() { return &members; }
 void Team::setLeader(Character *newLeader) { leader = newLeader; }
 void Team::setMembers(vector<Character *> *newMembers) {
   members = *newMembers;
+}
+
+Team::~Team() {
+  for (Character *member : members)
+    delete member;
+  members.clear();
 }
